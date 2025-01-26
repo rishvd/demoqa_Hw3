@@ -18,7 +18,7 @@ public class TestForm {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = ("https://demoqa.com");
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
+        //Configuration.holdBrowserOpen = true;
         file = new File("src/test/resources/img.png");
 
     }
