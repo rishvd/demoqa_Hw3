@@ -1,4 +1,3 @@
-
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,18 +8,14 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TestForm {
+public class DemoFormTests {
 
-    static File file;
 
     @BeforeAll
-    static void beforeAll() {
+    static void configureTests() {
         Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = ("https://demoqa.com");
+        Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
-        file = new File("src/test/resources/img.png");
-
     }
 
     @Test
@@ -41,20 +36,13 @@ public class TestForm {
         $(".subjects-auto-complete__value-container input").setValue("Math").pressEnter();
         $(".subjects-auto-complete__value-container input").setValue("physics").pressEnter();
         $("[for='hobbies-checkbox-2']").click();
-        $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFromClasspath("img.png");
         $("#currentAddress").setValue("MeatGrinder street 13");
         $("#state").click();
         $("#state").$(byText("NCR")).click();
         $("#city").click();
         $("#city").$(byText("Delhi")).click();
         $("#submit").click();
-
-
-
-
-
-
-
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Rishad Geyushov"));
@@ -68,9 +56,5 @@ public class TestForm {
         $(".table-responsive").shouldHave(text("MeatGrinder street 13"));
         $(".table-responsive").shouldHave(text("NCR Delhi"));
         $("#closeLargeModal").click();
-
-
-
-
     }
 }
